@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Винтерфелл — Админ-панель</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="admin.html">
+  <div id="site-header"></div>
+  <main>
+    <section class="hero">
+      <div class="container layout-two">
+        <div class="reveal">
+          <span class="eyebrow">Админ-панель клуба</span>
+          <h1 class="page-title">Управление контентом «Винтерфелла»</h1>
+          <p>Здесь можно редактировать состав, календарь матчей, новости и галерею, чтобы сайт клуба всегда оставался актуальным и аккуратно оформленным.</p>
+          <div class="hero-actions">
+            <a class="button button-secondary" href="#admin-shell">Перейти к редактированию</a>
+            <button class="button button-teal" type="button" id="admin-logout">Выйти</button>
+            <a class="button button-primary" href="index.html">Вернуться на сайт</a>
+          </div>
+        </div>
+        <div class="visual-frame reveal">
+          <img src="assets/img/banners/banner-victory.jpg" alt="Баннер админ-панели клуба">
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact" id="admin-login-section">
+      <div class="container admin-login-wrap">
+        <article class="admin-card admin-login-card reveal">
+          <span class="eyebrow">Закрытый доступ</span>
+          <h3>Вход администратора</h3>
+          <p>Панель управления доступна только владельцу сайта. После входа можно редактировать состав, матчи, новости и галерею.</p>
+          <form id="admin-login-form">
+            <div class="form-grid">
+              <input name="login" placeholder="Логин" autocomplete="username" required>
+              <input name="password" type="password" placeholder="Пароль" autocomplete="current-password" required>
+            </div>
+            <div class="form-actions">
+              <button class="button button-primary" type="submit">Войти</button>
+              <a class="button button-secondary" href="index.html">На сайт</a>
+            </div>
+            <div id="admin-login-message" hidden></div>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container admin-shell" id="admin-shell" hidden>
+        <aside class="admin-card admin-nav reveal">
+          <button class="button active" data-target="players">Состав</button>
+          <button class="button" data-target="matches">Матчи</button>
+          <button class="button" data-target="news">Новости</button>
+          <button class="button" data-target="gallery">Галерея</button>
+        </aside>
+
+        <div class="reveal admin-panels">
+          <section class="admin-card admin-tools-card">
+            <div class="admin-tools-head">
+              <div>
+                <span class="eyebrow">Сервис</span>
+                <h3>Резервная копия и импорт</h3>
+              </div>
+              <div id="admin-status" class="admin-mode"></div>
+            </div>
+            <textarea id="admin-import-area" placeholder="Вставьте JSON для восстановления данных"></textarea>
+            <div class="form-actions">
+              <button class="button button-secondary" type="button" id="admin-export">Скачать JSON</button>
+              <button class="button button-teal" type="button" id="admin-import">Импортировать JSON</button>
+            </div>
+            <div id="admin-tools-message" hidden></div>
+          </section>
+
+          <section class="admin-card" data-panel="players" id="admin-players">
+            <span class="eyebrow">Состав</span>
+            <h3>Редактирование игроков</h3>
+            <form>
+              <div class="form-grid">
+                <input name="name" placeholder="Имя игрока" required>
+                <input name="number" type="number" placeholder="Номер" required>
+                <input name="position" placeholder="Позиция" required>
+                <input name="age" type="number" placeholder="Возраст" required>
+                <input class="full" name="tag" placeholder="Краткая характеристика" required>
+                <input class="full" name="image" placeholder="Путь к изображению" value="assets/img/players/starting_01.jpg" required>
+                <select class="full" name="kit">
+                  <option value="home">Домашний комплект</option>
+                  <option value="away">Гостевой комплект</option>
+                  <option value="reserve">Запасной комплект</option>
+                  <option value="home-gk">Домашний вратарский</option>
+                  <option value="away-gk">Гостевой вратарский</option>
+                  <option value="reserve-gk">Запасной вратарский</option>
+                </select>
+              </div>
+              <div class="form-actions">
+                <button class="button button-primary" type="submit">Сохранить игрока</button>
+                <button class="button button-secondary" type="button" data-reset>Сбросить раздел</button>
+              </div>
+              <div class="admin-message" hidden></div>
+            </form>
+            <div class="admin-list"></div>
+          </section>
+
+          <section class="admin-card" data-panel="matches" id="admin-matches" hidden>
+            <span class="eyebrow">Матчи</span>
+            <h3>Редактирование календаря</h3>
+            <form>
+              <div class="form-grid">
+                <input name="date" type="date" required>
+                <input name="time" type="time" required>
+                <input name="opponent" placeholder="Соперник" required>
+                <input name="venue" placeholder="Место проведения" required>
+                <select class="full" name="type">
+                  <option value="Предстоящий">Предстоящий матч</option>
+                  <option value="Результат">Результат матча</option>
+                </select>
+                <input name="result" placeholder="Счёт, если матч сыгран">
+                <textarea class="full" name="description" placeholder="Комментарий к матчу" required></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="button button-primary" type="submit">Сохранить матч</button>
+                <button class="button button-secondary" type="button" data-reset>Сбросить раздел</button>
+              </div>
+              <div class="admin-message" hidden></div>
+            </form>
+            <div class="admin-list"></div>
+          </section>
+
+          <section class="admin-card" data-panel="news" id="admin-news" hidden>
+            <span class="eyebrow">Новости</span>
+            <h3>Редактирование публикаций</h3>
+            <form>
+              <div class="form-grid">
+                <input name="date" type="date" required>
+                <input name="category" placeholder="Категория" required>
+                <input class="full" name="title" placeholder="Заголовок" required>
+                <textarea class="full" name="excerpt" placeholder="Краткий анонс" required></textarea>
+                <textarea class="full" name="content" placeholder="Полный текст новости" required></textarea>
+                <input class="full" name="image" placeholder="Путь к изображению" value="assets/img/news/news-win.jpg" required>
+              </div>
+              <div class="form-actions">
+                <button class="button button-primary" type="submit">Сохранить новость</button>
+                <button class="button button-secondary" type="button" data-reset>Сбросить раздел</button>
+              </div>
+              <div class="admin-message" hidden></div>
+            </form>
+            <div class="admin-list"></div>
+          </section>
+
+          <section class="admin-card" data-panel="gallery" id="admin-gallery" hidden>
+            <span class="eyebrow">Галерея</span>
+            <h3>Редактирование фотографий</h3>
+            <form>
+              <div class="form-grid">
+                <input name="title" placeholder="Название фото" required>
+                <input name="type" placeholder="Тип / категория" required>
+                <input class="full" name="image" placeholder="Путь к изображению" value="assets/img/gallery/gallery-victory.jpg" required>
+              </div>
+              <div class="form-actions">
+                <button class="button button-primary" type="submit">Сохранить фото</button>
+                <button class="button button-secondary" type="button" data-reset>Сбросить раздел</button>
+              </div>
+              <div class="admin-message" hidden></div>
+            </form>
+            <div class="admin-list"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

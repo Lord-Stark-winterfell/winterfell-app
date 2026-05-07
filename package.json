@@ -1,0 +1,12 @@
+{
+  "name": "winterfell-fc-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Веб-приложение любительского футбольного клуба ЛФК «Винтерфелл» с постоянной админ-панелью.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

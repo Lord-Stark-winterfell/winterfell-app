@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Винтерфелл — Контакты</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="contacts.html">
+  <div id="site-header"></div>
+  <main>
+    <section class="hero">
+      <div class="container layout-two">
+        <div class="reveal">
+          <span class="eyebrow">Контакты</span>
+          <h1 class="page-title">Связь с клубом и обратная связь</h1>
+          <p>По вопросам сотрудничества, участия в жизни клуба, матчей и партнерских предложений здесь собраны основные каналы связи с «Винтерфеллом».</p>
+        </div>
+        <div class="visual-frame reveal">
+          <img src="assets/img/banners/banner-contacts.jpg" alt="Знак клуба">
+</div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container contact-grid">
+        <article class="panel reveal">
+          <span class="eyebrow">Каналы связи</span>
+          <h3>Контактные данные</h3>
+                    <p>E-mail: lfcwinterfell@gmail.com</p>
+          <p>Telegram: @Winterfelllfc</p>
+        </article>
+        <article class="form-shell reveal">
+          <span class="eyebrow">Форма сообщения</span>
+          <form id="contact-form">
+            <div class="form-grid">
+              <input name="name" placeholder="Ваше имя" required>
+              <input name="email" type="email" placeholder="Электронная почта" required>
+              <input class="full" name="subject" placeholder="Тема сообщения" required>
+              <textarea class="full" name="message" placeholder="Текст сообщения" required></textarea>
+            </div>
+            <div class="form-actions"><button class="button button-primary" type="submit">Отправить</button></div>
+            <div id="contact-message"></div>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

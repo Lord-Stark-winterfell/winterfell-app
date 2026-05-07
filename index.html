@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Винтерфелл — Главная</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="index.html">
+  <div id="site-header"></div>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Любительский футбольный клуб</span>
+          <h1>Винтерфелл</h1>
+          <p>Клуб, в котором футбольная амбиция сочетается с дисциплиной, собственным стилем и стремлением выйти на профессиональный уровень. «Винтерфелл» объединяет игроков, болельщиков и клубную жизнь в едином современном пространстве.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="about.html">О клубе</a>
+            <a class="button button-secondary" href="matches.html">Ближайший матч</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><strong>19</strong><p>игроков в расширенной заявке клуба</p></div>
+            <div class="hero-stat"><strong>11</strong><p>футболистов стартового состава</p></div>
+            <div class="hero-stat"><strong>8</strong><p>игроков резерва для ротации</p></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="visual-frame">
+            <img src="assets/img/banners/banner-home.jpg" alt="Командное фото ЛФК Винтерфелл">
+</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container about-grid">
+        <article class="panel reveal">
+          <span class="eyebrow">О клубе</span>
+          <h2 class="section-title">Системный клубный проект</h2>
+          <p>«Винтерфелл» задуман как любительская команда с последовательным развитием состава, визуальной идентичности и устойчивой футбольной среды. Сайт клуба поддерживает этот образ за счет четкой структуры, понятной навигации и живого контента.</p>
+          <div class="form-actions"><a class="button button-secondary" href="about.html">Подробнее о клубе</a></div>
+        </article>
+        <article class="panel reveal">
+          <span class="eyebrow">Фирменный стиль</span>
+          <h3>Палитра и экипировка</h3>
+          <p>Домашний комплект задает основную темную палитру, гостевой поддерживает светлые контрасты, а запасная форма добавляет фирменный бирюзовый акцент.</p>
+          <div class="thumb" style="margin-top:16px; aspect-ratio: 16/9;"><img src="assets/img/players/team_photo.jpg" alt="Командное фото клуба"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Матчи</span>
+            <h2 class="section-title">Ближайшая встреча</h2>
+          </div>
+          <a class="text-link" href="matches.html">Полное расписание</a>
+        </div>
+        <div class="match-banner reveal" id="home-match"></div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Новости</span>
+            <h2 class="section-title">Последние события клуба</h2>
+          </div>
+          <a class="text-link" href="news.html">Все публикации</a>
+        </div>
+        <div class="news-list" id="home-news"></div>
+      </div>
+    </section>
+
+    <section class="section compact">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="eyebrow">Состав</span>
+            <h2 class="section-title">Игроки команды</h2>
+          </div>
+          <a class="text-link" href="squad.html">Полный состав</a>
+        </div>
+        <div class="player-list" id="home-players"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

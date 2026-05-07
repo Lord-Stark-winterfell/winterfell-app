@@ -1,0 +1,192 @@
+[
+  {
+    "id": 1,
+    "name": "Илья Морозов",
+    "number": 1,
+    "position": "Вратарь",
+    "age": 22,
+    "tag": "Стартовый вратарь",
+    "image": "assets/img/players/starting_01.jpg",
+    "kit": "home-gk"
+  },
+  {
+    "id": 2,
+    "name": "Артём Соколов",
+    "number": 4,
+    "position": "Защитник",
+    "age": 23,
+    "tag": "Центр обороны",
+    "image": "assets/img/players/starting_02.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 3,
+    "name": "Егор Фадеев",
+    "number": 2,
+    "position": "Защитник",
+    "age": 21,
+    "tag": "Правый фланг",
+    "image": "assets/img/players/starting_03.jpg",
+    "kit": "away"
+  },
+  {
+    "id": 4,
+    "name": "Иван Крылов",
+    "number": 5,
+    "position": "Защитник",
+    "age": 24,
+    "tag": "Силовая борьба",
+    "image": "assets/img/players/starting_04.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 5,
+    "name": "Кирилл Новиков",
+    "number": 3,
+    "position": "Защитник",
+    "age": 22,
+    "tag": "Левый фланг",
+    "image": "assets/img/players/starting_05.jpg",
+    "kit": "reserve"
+  },
+  {
+    "id": 6,
+    "name": "Даниил Власов",
+    "number": 8,
+    "position": "Полузащитник",
+    "age": 22,
+    "tag": "Контроль темпа",
+    "image": "assets/img/players/starting_06.jpg",
+    "kit": "away"
+  },
+  {
+    "id": 7,
+    "name": "Сергей Лебедев",
+    "number": 6,
+    "position": "Полузащитник",
+    "age": 25,
+    "tag": "Опорная зона",
+    "image": "assets/img/players/starting_07.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 8,
+    "name": "Михаил Корнев",
+    "number": 7,
+    "position": "Полузащитник",
+    "age": 23,
+    "tag": "Связь линий",
+    "image": "assets/img/players/starting_08.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 9,
+    "name": "Никита Орлов",
+    "number": 10,
+    "position": "Нападающий",
+    "age": 21,
+    "tag": "Завершение атак",
+    "image": "assets/img/players/starting_09.jpg",
+    "kit": "reserve"
+  },
+  {
+    "id": 10,
+    "name": "Алексей Жаров",
+    "number": 11,
+    "position": "Нападающий",
+    "age": 23,
+    "tag": "Скорость и дриблинг",
+    "image": "assets/img/players/starting_10.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 11,
+    "name": "Роман Северин",
+    "number": 9,
+    "position": "Нападающий",
+    "age": 24,
+    "tag": "Игра в штрафной",
+    "image": "assets/img/players/starting_11.jpg",
+    "kit": "away"
+  },
+  {
+    "id": 12,
+    "name": "Максим Белов",
+    "number": 12,
+    "position": "Вратарь",
+    "age": 20,
+    "tag": "Запасной вратарь",
+    "image": "assets/img/players/bench_goalkeeper.jpg",
+    "kit": "away-gk"
+  },
+  {
+    "id": 13,
+    "name": "Олег Громов",
+    "number": 15,
+    "position": "Защитник",
+    "age": 22,
+    "tag": "Надежный резерв",
+    "image": "assets/img/players/bench_02.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 14,
+    "name": "Павел Титов",
+    "number": 18,
+    "position": "Защитник",
+    "age": 21,
+    "tag": "Подключения по флангу",
+    "image": "assets/img/players/bench_03.jpg",
+    "kit": "away"
+  },
+  {
+    "id": 15,
+    "name": "Владимир Широков",
+    "number": 16,
+    "position": "Полузащитник",
+    "age": 24,
+    "tag": "Работа между линиями",
+    "image": "assets/img/players/bench_04.jpg",
+    "kit": "reserve"
+  },
+  {
+    "id": 16,
+    "name": "Андрей Ветров",
+    "number": 14,
+    "position": "Полузащитник",
+    "age": 20,
+    "tag": "Темп и прессинг",
+    "image": "assets/img/players/bench_05.jpg",
+    "kit": "home"
+  },
+  {
+    "id": 17,
+    "name": "Глеб Романов",
+    "number": 19,
+    "position": "Полузащитник",
+    "age": 23,
+    "tag": "Выход из обороны",
+    "image": "assets/img/players/bench_06.jpg",
+    "kit": "away"
+  },
+  {
+    "id": 18,
+    "name": "Денис Холодов",
+    "number": 17,
+    "position": "Нападающий",
+    "age": 22,
+    "tag": "Фланговая скорость",
+    "image": "assets/img/players/bench_07.jpg",
+    "kit": "reserve"
+  },
+  {
+    "id": 19,
+    "name": "Матвей Ларин",
+    "number": 20,
+    "position": "Нападающий",
+    "age": 21,
+    "tag": "Свежесть в атаке",
+    "image": "assets/img/players/bench_08.jpg",
+    "kit": "home"
+  }
+]

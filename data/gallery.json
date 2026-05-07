@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Игра на втором этаже",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-header-duel.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Контратака под дождём",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-counterattack.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Борьба за мяч",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-duel-yellow.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Победная эмоция",
+    "type": "Команда",
+    "image": "assets/img/gallery/gallery-victory.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Дриблинг против красных",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-dribble-red.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Выход на ударную позицию",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-shot.jpg"
+  },
+  {
+    "id": 7,
+    "title": "Тренировка под прожекторами",
+    "type": "Тренировка",
+    "image": "assets/img/gallery/gallery-training.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Выход команды на поле",
+    "type": "Команда",
+    "image": "assets/img/gallery/gallery-walkout.jpg"
+  },
+  {
+    "id": 9,
+    "title": "Вратарский сейв",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-goalkeeper-save.jpg"
+  },
+  {
+    "id": 10,
+    "title": "Прыжок за мячом",
+    "type": "Матч",
+    "image": "assets/img/gallery/gallery-save.jpg"
+  }
+]
