@@ -2301,3 +2301,38 @@ body {
     font-size: 2.05rem !important;
   }
 }
+
+/* ===== Admin contact messages ===== */
+.messages-list {
+  margin-top: 18px;
+}
+.admin-message-item {
+  align-items: stretch;
+}
+.admin-message-item.is-new {
+  border-color: rgba(16,167,182,0.32);
+  background: linear-gradient(180deg, rgba(16,167,182,0.10), rgba(255,255,255,0.03));
+}
+.message-headline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.message-text {
+  margin-top: 12px !important;
+  white-space: pre-wrap;
+  color: rgba(243,238,229,0.88) !important;
+}
+.admin-message-item a {
+  color: #baf2f6;
+}
+@media (max-width: 700px) {
+  .admin-message-item {
+    display: grid !important;
+  }
+  .admin-message-item .admin-actions {
+    justify-content: flex-start;
+  }
+}

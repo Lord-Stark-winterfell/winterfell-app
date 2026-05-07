@@ -372,12 +372,39 @@ function renderGallery() {
 function initContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const message = document.getElementById('contact-message');
-    message.textContent = 'Сообщение отправлено. Мы свяжемся с вами в ближайшее время.';
-    message.className = 'form-message';
-    form.reset();
+    const submit = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      subject: formData.get('subject'),
+      message: formData.get('message')
+    };
+
+    try {
+      if (submit) submit.disabled = true;
+      if (window.location.protocol === 'file:') {
+        throw new Error('Форма работает после запуска сайта через сервер.');
+      }
+      const response = await fetch('api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Сообщение не удалось отправить');
+      message.textContent = 'Сообщение отправлено. Мы свяжемся с вами в ближайшее время.';
+      message.className = 'form-message';
+      form.reset();
+    } catch (error) {
+      message.textContent = error.message;
+      message.className = 'form-message error';
+    } finally {
+      if (submit) submit.disabled = false;
+    }
   });
 }
 
@@ -631,6 +658,126 @@ function initAdminLogin(onSuccess) {
   });
 }
 
+
+function formatMessageDate(dateString) {
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) return escapeHTML(dateString || '');
+  return date.toLocaleString('ru-RU', {
+    day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit'
+  });
+}
+
+async function fetchAdminMessages() {
+  const response = await fetch('api/data/messages', {
+    cache: 'no-store',
+    headers: { 'X-Admin-Token': adminToken() }
+  });
+  const payload = await response.json().catch(() => ([]));
+  if (!response.ok) throw new Error(payload.error || 'Не удалось загрузить сообщения');
+  return Array.isArray(payload) ? payload : [];
+}
+
+async function saveAdminMessages(messages) {
+  const response = await fetch('api/data/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Admin-Token': adminToken()
+    },
+    body: JSON.stringify(messages)
+  });
+  const payload = await response.json().catch(() => ([]));
+  if (!response.ok) throw new Error(payload.error || 'Не удалось сохранить сообщения');
+  return Array.isArray(payload) ? payload : [];
+}
+
+function initAdminMessages() {
+  const list = document.getElementById('admin-messages-list');
+  if (!list) return;
+  const messageBox = document.getElementById('admin-messages-message');
+  const refreshBtn = document.getElementById('admin-refresh-messages');
+  const markReadBtn = document.getElementById('admin-mark-messages-read');
+  let messages = [];
+
+  const setMessage = (text, isError = false) => {
+    if (!messageBox) return;
+    messageBox.textContent = text;
+    messageBox.className = `form-message admin-message${isError ? ' error' : ''}`;
+    messageBox.hidden = false;
+  };
+
+  const render = () => {
+    if (!messages.length) {
+      list.innerHTML = '<div class="empty-state">Сообщений пока нет.</div>';
+      return;
+    }
+    list.innerHTML = messages.map((item) => `
+      <article class="admin-item admin-message-item ${item.status === 'new' ? 'is-new' : ''}">
+        <div>
+          <div class="message-headline">
+            <strong>${escapeHTML(item.subject)}</strong>
+            ${item.status === 'new' ? '<span class="badge teal">Новое</span>' : '<span class="badge">Прочитано</span>'}
+          </div>
+          <p>${formatMessageDate(item.date)} • ${escapeHTML(item.name)} • <a href="mailto:${escapeHTML(item.email)}">${escapeHTML(item.email)}</a></p>
+          <p class="message-text">${escapeHTML(item.message)}</p>
+        </div>
+        <div class="admin-actions">
+          <button type="button" class="small-btn" data-read="${escapeHTML(item.id)}">Прочитано</button>
+          <button type="button" class="small-btn danger" data-delete="${escapeHTML(item.id)}">Удалить</button>
+        </div>
+      </article>`).join('');
+
+    list.querySelectorAll('[data-read]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        try {
+          messages = messages.map((item) => String(item.id) === button.dataset.read ? { ...item, status: 'read' } : item);
+          messages = await saveAdminMessages(messages);
+          render();
+          setMessage('Сообщение отмечено как прочитанное.');
+        } catch (error) {
+          setMessage(error.message, true);
+        }
+      });
+    });
+
+    list.querySelectorAll('[data-delete]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        try {
+          messages = messages.filter((item) => String(item.id) !== button.dataset.delete);
+          messages = await saveAdminMessages(messages);
+          render();
+          setMessage('Сообщение удалено.');
+        } catch (error) {
+          setMessage(error.message, true);
+        }
+      });
+    });
+  };
+
+  const load = async () => {
+    try {
+      messages = await fetchAdminMessages();
+      render();
+    } catch (error) {
+      setMessage(error.message, true);
+    }
+  };
+
+  refreshBtn?.addEventListener('click', load);
+  markReadBtn?.addEventListener('click', async () => {
+    try {
+      messages = messages.map((item) => ({ ...item, status: 'read' }));
+      messages = await saveAdminMessages(messages);
+      render();
+      setMessage('Все сообщения отмечены как прочитанные.');
+    } catch (error) {
+      setMessage(error.message, true);
+    }
+  });
+
+  load();
+}
+
 async function initAdmin() {
   const shell = document.getElementById('admin-shell');
   if (!shell) return;
@@ -679,6 +826,7 @@ async function initAdmin() {
       { name: 'title' }, { name: 'type' }, { name: 'image' }
     ]
   });
+    initAdminMessages();
     initAdminTools();
   };
 

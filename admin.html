@@ -58,6 +58,7 @@
           <button class="button" data-target="matches">Матчи</button>
           <button class="button" data-target="news">Новости</button>
           <button class="button" data-target="gallery">Галерея</button>
+          <button class="button" data-target="messages">Сообщения</button>
         </aside>
 
         <div class="reveal admin-panels">
@@ -168,6 +169,18 @@
               <div class="admin-message" hidden></div>
             </form>
             <div class="admin-list"></div>
+          </section>
+
+          <section class="admin-card" data-panel="messages" id="admin-messages" hidden>
+            <span class="eyebrow">Обратная связь</span>
+            <h3>Сообщения с формы</h3>
+            <p>Здесь отображаются обращения, которые пользователи отправили через страницу контактов.</p>
+            <div class="form-actions">
+              <button class="button button-secondary" type="button" id="admin-refresh-messages">Обновить</button>
+              <button class="button button-teal" type="button" id="admin-mark-messages-read">Отметить все прочитанными</button>
+            </div>
+            <div class="admin-message" id="admin-messages-message" hidden></div>
+            <div class="admin-list messages-list" id="admin-messages-list"></div>
           </section>
         </div>
       </div>

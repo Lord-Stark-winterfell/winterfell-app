@@ -10,7 +10,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'winterfell2026';
 const LEGACY_ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
 const SESSIONS = new Map();
 const SESSION_TTL_MS = 1000 * 60 * 60 * 8;
-const COLLECTIONS = new Set(['players', 'matches', 'news', 'gallery']);
+const COLLECTIONS = new Set(['players', 'matches', 'news', 'gallery', 'messages']);
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -54,6 +54,29 @@ function readBody(req) {
 
 function dataPath(collection) {
   return path.join(ROOT, 'data', `${collection}.json`);
+}
+
+
+async function readCollection(collection) {
+  const file = dataPath(collection);
+  try {
+    const raw = await fs.promises.readFile(file, 'utf-8');
+    const parsed = JSON.parse(raw || '[]');
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    if (error.code === 'ENOENT') return [];
+    throw error;
+  }
+}
+
+async function writeCollection(collection, value) {
+  const file = dataPath(collection);
+  await fs.promises.mkdir(path.dirname(file), { recursive: true });
+  await fs.promises.writeFile(file, JSON.stringify(Array.isArray(value) ? value : [], null, 2), 'utf-8');
+}
+
+function cleanText(value, maxLength = 1000) {
+  return String(value || '').replace(/\s+/g, ' ').trim().slice(0, maxLength);
 }
 
 function createSession() {
@@ -105,9 +128,52 @@ async function handleAuth(req, res, pathname) {
   return sendJson(res, 404, { error: 'Неизвестный auth-раздел' });
 }
 
+
+
+async function handleContactMessage(req, res) {
+  if (req.method !== 'POST') {
+    return sendJson(res, 405, { error: 'Метод не поддерживается' });
+  }
+  try {
+    const body = await readBody(req);
+    const payload = JSON.parse(body || '{}');
+    const name = cleanText(payload.name, 120);
+    const email = cleanText(payload.email, 160);
+    const subject = cleanText(payload.subject, 180);
+    const message = cleanText(payload.message, 3000);
+
+    if (!name || !email || !subject || !message) {
+      return sendJson(res, 400, { error: 'Заполните имя, почту, тему и текст сообщения' });
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return sendJson(res, 400, { error: 'Укажите корректную электронную почту' });
+    }
+
+    const messages = await readCollection('messages');
+    const item = {
+      id: Date.now(),
+      date: new Date().toISOString(),
+      name,
+      email,
+      subject,
+      message,
+      status: 'new'
+    };
+    messages.unshift(item);
+    await writeCollection('messages', messages);
+    return sendJson(res, 200, { ok: true });
+  } catch (error) {
+    return sendJson(res, 400, { error: error.message || 'Сообщение не удалось отправить' });
+  }
+}
+
 async function handleApi(req, res, pathname) {
   if (pathname.startsWith('/api/auth/')) {
     return handleAuth(req, res, pathname);
+  }
+
+  if (pathname === '/api/contact') {
+    return handleContactMessage(req, res);
   }
 
   if (pathname === '/api/status') {
@@ -128,9 +194,11 @@ async function handleApi(req, res, pathname) {
   const file = dataPath(collection);
 
   if (req.method === 'GET') {
+    if (collection === 'messages' && !isAuthorized(req)) {
+      return sendJson(res, 401, { error: 'Нужна авторизация администратора' });
+    }
     try {
-      const raw = await fs.promises.readFile(file, 'utf-8');
-      return sendJson(res, 200, JSON.parse(raw));
+      return sendJson(res, 200, await readCollection(collection));
     } catch (error) {
       return sendJson(res, 500, { error: `Не удалось прочитать ${collection}.json` });
     }
@@ -146,7 +214,7 @@ async function handleApi(req, res, pathname) {
       if (!Array.isArray(payload)) {
         return sendJson(res, 400, { error: 'Данные должны быть массивом записей' });
       }
-      await fs.promises.writeFile(file, JSON.stringify(payload, null, 2), 'utf-8');
+      await writeCollection(collection, payload);
       return sendJson(res, 200, payload);
     } catch (error) {
       return sendJson(res, 400, { error: error.message });
