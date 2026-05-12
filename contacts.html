@@ -1,183 +1,55 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты — Винтерфелл</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-        }
-
-        header {
-            background: #111827;
-            padding: 20px;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        .banner {
-            width: 100%;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            object-fit: cover;
-        }
-
-        .contact-info {
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-        }
-
-        .contact-info h2 {
-            margin-bottom: 15px;
-        }
-
-        .contact-info p {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-
-        .contact-form {
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 20px;
-        }
-
-        .contact-form h2 {
-            margin-bottom: 20px;
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
-            border: none;
-            border-radius: 12px;
-            background: #334155;
-            color: white;
-            font-size: 16px;
-        }
-
-        .contact-form textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        .contact-form button {
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 14px 25px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.2s;
-        }
-
-        .contact-form button:hover {
-            background: #1d4ed8;
-        }
-
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #111827;
-            margin-top: 50px;
-        }
-
-        max-width: 768px {
-            .container {
-                padding: 15px;
-            }
-
-            .contact-form,
-            .contact-info {
-                padding: 20px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Винтерфелл — Контакты</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap&quot; rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body>
-
-<header>
-    <nav>
-        <a href="index.html">Главная</a>
-        <a href="about.html">О клубе</a>
-        <a href="squad.html">Состав</a>
-        <a href="matches.html">Матчи</a>
-        <a href="news.html">Новости</a>
-        <a href="gallery.html">Галерея</a>
-        <a href="contacts.html">Контакты</a>
-    </nav>
-</header>
-
-<div class="container">
-
-    <img src="assets/banners/contacts-banner.jpg" alt="Баннер" class="banner">
-
-    <div class="contact-info">
-        <h2>Контактная информация</h2>
-
-        <p><strong>Email:</strong> lfcwinterfell@gmail.com</p>
-        <p><strong>Telegram:</strong> @Winterfelllfc</p>
-    </div>
-
-    <div class="contact-form">
-        <h2>Связаться с клубом</h2>
-
-        <form id="contactForm">
-
-            <input type="text" id="name" placeholder="Ваше имя" required>
-
-            <input type="email" id="email" placeholder="Электронная почта" required>
-
-            <input type="text" id="subject" placeholder="Тема сообщения" required>
-
-            <textarea id="message" placeholder="Текст сообщения" required></textarea>
-
-            <button type="submit">Отправить</button>
-
-        </form>
-    </div>
-
+<body data-page="contacts.html">
+  <div id="site-header"></div>
+  <main>
+    <section class="hero">
+      <div class="container layout-two">
+        <div class="reveal">
+          <span class="eyebrow">Контакты</span>
+          <h1 class="page-title">Связь с клубом и обратная связь</h1>
+          <p>По вопросам сотрудничества, участия в жизни клуба, матчей и партнерских предложений здесь собраны основные каналы связи с «Винтерфеллом».</p>
+        </div>
+        <div class="visual-frame reveal">
+          <img src="assets/img/banners/banner-contacts.jpg" alt="Знак клуба">
 </div>
+      </div>
+    </section>
 
-<footer>
-    © 2026 Винтерфелл
-</footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-    const form = document.getElementById('contactForm');
-
-    form
+    <section class="section compact">
+      <div class="container contact-grid">
+        <article class="panel reveal">
+          <span class="eyebrow">Каналы связи</span>
+          <h3>Контактные данные</h3>
+                    <p>E-mail: lfcwinterfell@gmail.com</p>
+          <p>Telegram: @Winterfelllfc</p>
+        </article>
+        <article class="form-shell reveal">
+          <span class="eyebrow">Форма сообщения</span>
+          <form id="contact-form">
+            <div class="form-grid">
+              <input name="name" placeholder="Ваше имя" required>
+              <input name="email" type="email" placeholder="Электронная почта" required>
+              <input class="full" name="subject" placeholder="Тема сообщения" required>
+              <textarea class="full" name="message" placeholder="Текст сообщения" required></textarea>
+            </div>
+            <div class="form-actions"><button class="button button-primary" type="submit">Отправить</button></div>
+            <div id="contact-message"></div>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
